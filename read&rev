@@ -1,0 +1,105 @@
+#!/usr/bin/env python3
+
+
+"""
+*****************************************************************************************************************
+File name: read_&_reverse.py
+
+Author:  Kimia Rezvani
+
+Date: 02/18/2021
+
+Modifications: 02/21/2021
+
+Description: The program uses a function to read the text from the file"stand_by_your_man.txt", then uses one
+            function to prints the input in the reverse order into another text file:
+*****************************************************************************************************************
+"""
+
+SONG_LYRICS = "stand_by_your_man.txt"  # set global variable that target file and contain text to be read
+REVERSED_LYRICS = "reversed_stand_by_your_man.txt"  # set global variable that creates file that contain reversed lyrics
+
+
+def read_lyrics():
+    """
+    *****************************************************************************************************************
+       Function: read_lyrics()
+       Parameters: lyrics - string to be reversed, SONG_LYRICS-text file that includes lyrics
+       Outputs: None
+       Returns: lyrics-list reverse
+
+      
+        Date: 02/16/2021
+        Modifications: 02/21/2021
+        Description:
+        The function opens and reads the file.  Each line is then stripped of \n in order to create a list of the lines.
+        The list lyrics is then reversed and returned to the write_lyrics function
+
+
+    **************************************************************************************************************
+    """
+    lyrics = []  # create list
+    with open(SONG_LYRICS) as file:   # open file
+        for line in file:             # read line
+            line = line.replace("\n", "")  # strip "\n"
+            lyrics.append(line)
+        lyrics.reverse()  # reverese order
+        return lyrics  # return reveresed order
+
+
+def write_lyrics(lyrics):
+    """
+     *****************************************************************************************************************
+        Function: write_lyrics(lyrics)
+        Parameters: lyrics -list read by the function read_lyrics(), REVERSED_LYRICS
+        Outputs: lyrics written to REVERSED_LYRICS- the variable containing "reversed_stand_by_your_man.txt"
+        Returns:
+
+         Date: 02/21/2021
+         Modifications: 02/21/2021
+         Description: This function takes the reversed order lyrics from read_lyrics()
+         and creates a file to write the lyrics into.
+
+     **************************************************************************************************************
+    """
+    with open(REVERSED_LYRICS, "w") as file:
+        for lyric in lyrics:
+            file.write(lyric + "\n")
+
+
+def main():
+    """""
+        Function: main()
+
+        Parameters: lyrics -list read by the function: read_lyrics()
+
+        Outputs: "reversed_stand_by_your_man.txt" -by use of write function: write_lyrics(lyrics)
+
+       
+
+        Date: 02/16/2021
+
+        Modifications: 02/16/2021
+
+        Description:
+
+            -Calls the function read_lyrics() to:
+                -open text: "stand_by_your_man.txt"
+                -read text
+                -create a list
+                -appends line into new list lyrics
+                -return reverse order of line
+
+        **************************************************************************************************************
+        """
+
+    # open & read the file
+    read_lyrics()
+    lyrics = read_lyrics()  # define variable to put into write file fucntion
+
+    # write to file
+    write_lyrics(lyrics)
+
+
+if __name__ == "__main__":
+    main()  # starts the program
